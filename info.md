@@ -1,0 +1,1 @@
+A visual Lovelace card for the Asterisk Parking Monitor Home Assistant integration. Shows parking slots, caller ID, parked-call totals, and available capacity.
