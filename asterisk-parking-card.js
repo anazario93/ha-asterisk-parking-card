@@ -63,8 +63,10 @@
         const plausibleName = /asterisk.*parking|parking.*(401|402|403)/i.test(id);
         const parkingFilter = !this._config.parking_lot ||
           String(attrs.parking_lot || "").toLowerCase() === String(this._config.parking_lot).toLowerCase();
-        return (hasSlot || plausibleName) && parkingFilter &&
-          !/total_parked_calls|parked_calls_count|available_slots/i.test(id);
+        // Exclude integration/card update entities and non-slot summary sensors.
+        const excludedEntity = /(?:^|_)update(?:_|$)/i.test(id) ||
+          /total_parked_calls|parked_calls_count|available_slots/i.test(id);
+        return (hasSlot || plausibleName) && parkingFilter && !excludedEntity;
       });
       this._entities = [...new Set(candidates)].sort((a, b) => {
         const aa = Number(states[a]?.attributes?.parking_slot ?? a.match(/(\d{3,})/)?.[1] ?? 0);
