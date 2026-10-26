@@ -43,11 +43,20 @@
     }
 
     getLayoutOptions() {
+      // Sections view uses these values to reserve layout space. The card's
+      // content grows with the number of parking slots, so reserve enough rows
+      // to prevent the slot list from overlapping the section below it.
+      const slotCount = Math.max(
+        this._entities.length,
+        Array.isArray(this._config.entities) ? this._config.entities.length : 0,
+        3
+      );
+      const rows = Math.max(5, slotCount + 3);
       return {
         grid_columns: 12,
         grid_min_columns: 6,
-        grid_rows: 4,
-        grid_min_rows: 3,
+        grid_rows: rows,
+        grid_min_rows: rows,
       };
     }
 
