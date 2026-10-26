@@ -37,9 +37,9 @@ show_header: true
 # You can set these explicitly, or leave them blank to auto-discover
 # entities from your Asterisk Parking Monitor integration.
 entities:
-  - sensor.asterisk_parking_parking_401
-  - sensor.asterisk_parking_parking_402
-  - sensor.asterisk_parking_parking_403
+  - sensor.parking_401
+  - sensor.parking_402
+  - sensor.parking_403
 count_entity: sensor.asterisk_parking_total_parked_calls
 ```
 
