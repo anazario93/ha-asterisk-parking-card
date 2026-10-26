@@ -42,21 +42,14 @@
       return Math.max(3, (this._entities.length || 3) + 2);
     }
 
-    getLayoutOptions() {
-      // Sections view uses these values to reserve layout space. The card's
-      // content grows with the number of parking slots, so reserve enough rows
-      // to prevent the slot list from overlapping the section below it.
-      const slotCount = Math.max(
-        this._entities.length,
-        Array.isArray(this._config.entities) ? this._config.entities.length : 0,
-        3
-      );
-      const rows = Math.max(5, slotCount + 3);
+    getGridOptions() {
+      // In Sections view, "auto" makes Home Assistant size the card to its
+      // rendered content instead of reserving a fixed number of grid rows.
+      // This prevents the slot list from overlapping cards in later sections.
       return {
-        grid_columns: 12,
-        grid_min_columns: 6,
-        grid_rows: rows,
-        grid_min_rows: rows,
+        columns: 12,
+        rows: "auto",
+        min_columns: 6,
       };
     }
 
@@ -225,7 +218,7 @@
 
     _styles() {
       return `
-        :host { display:block; color:var(--primary-text-color, #eef4f8); }
+        :host { display:block; min-width:0; color:var(--primary-text-color, #eef4f8); }
         ha-card {
           overflow:hidden;
           border:1px solid var(--ha-card-border-color, var(--divider-color, rgba(130,155,170,.18)));
