@@ -19,7 +19,11 @@ The card includes a connection/status header, parked/available/capacity counters
 
 ### HACS
 
-This repository is a standalone Lovelace resource. You can add it through HACS using Custom repositories with category Dashboard if your HACS version offers that category; otherwise use the manual install instructions above.
+1. Open **HACS → ⋮ → Custom repositories**.
+2. Add `https://github.com/anazario93/ha-asterisk-parking-card` with category **Dashboard**.
+3. Install **Asterisk Parking Card** and refresh your browser. HACS should add the dashboard resource automatically.
+
+If HACS still reports a repository structure error, choose **Update information** for the repository or remove and re-add the custom repository so HACS re-reads `hacs.json`. If your HACS version doesn't offer the Dashboard category, use the manual install instructions above.
 
 ## Add the card
 
