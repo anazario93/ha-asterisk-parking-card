@@ -19,7 +19,7 @@ The card includes a connection/status header, parked/available/capacity counters
 
 ### HACS
 
-This repository is structured as a standalone Lovelace resource for eventual HACS custom-repository use. If your HACS version doesn't expose a dashboard/frontend category for this repository, use the manual install instructions above.
+This repository is a standalone Lovelace resource. You can add it through HACS using Custom repositories with category Dashboard if your HACS version offers that category; otherwise use the manual install instructions above.
 
 ## Add the card
 
