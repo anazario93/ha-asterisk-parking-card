@@ -55,7 +55,8 @@
       if (!this._hass) return;
       const states = this._hass.states || {};
       const configured = (this._config.entities || []).filter((id) => id && states[id]);
-      const candidates = configured.length ? configured : Object.keys(states).filter((id) => {
+      const hasExplicitEntities = Array.isArray(this._config.entities) && this._config.entities.length > 0;
+      const candidates = hasExplicitEntities ? configured : Object.keys(states).filter((id) => {
         const state = states[id];
         const attrs = state?.attributes || {};
         const hasSlot = attrs.parking_slot !== undefined;
@@ -74,9 +75,12 @@
       if (explicitCount && states[explicitCount]) {
         this._countEntity = explicitCount;
       } else {
-        this._countEntity = Object.keys(states).find((id) =>
-          /asterisk.*parking.*(total_parked_calls|parked_calls_count)|total_parked_calls/i.test(id)
-        ) || null;
+        this._countEntity = Object.keys(states).find((id) => {
+          const attrs = states[id]?.attributes || {};
+          const name = String(attrs.friendly_name || "");
+          return /total parked calls|parked calls count/i.test(name) ||
+            /asterisk.*parking.*(total_parked_calls|parked_calls_count)|total_parked_calls/i.test(id);
+        }) || null;
       }
     }
 
